@@ -12,6 +12,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null); // New ref for the input field
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -102,12 +103,13 @@ export default function Home() {
 
         <form onSubmit={handleSubmit} className="p-4 bg-gray-900 border-t border-gray-800 flex gap-3">
           <input
+            ref={inputRef} // Added ref to the input field
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your stupid question here..."
             className="flex-1 bg-gray-950 text-white border border-gray-700 rounded-full px-5 py-3 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-            disabled={isLoading}
+            // disabled={isLoading}  <-- Removed this line so input stays focused
           />
           <button
             type="submit"
